@@ -1,0 +1,12 @@
+c:\users\2882_tsukanov\documents\visual studio 2010\Projects\Lab_12_variant_1\Lab_12_variant_1\bin\Debug\Lab_12_variant_1.exe
+c:\users\2882_tsukanov\documents\visual studio 2010\Projects\Lab_12_variant_1\Lab_12_variant_1\bin\Debug\Lab_12_variant_1.pdb
+c:\users\2882_tsukanov\documents\visual studio 2010\Projects\Lab_12_variant_1\Lab_12_variant_1\obj\x86\Debug\Lab_12_variant_1.General.resources
+c:\users\2882_tsukanov\documents\visual studio 2010\Projects\Lab_12_variant_1\Lab_12_variant_1\obj\x86\Debug\Lab_12_variant_1.Properties.Resources.resources
+c:\users\2882_tsukanov\documents\visual studio 2010\Projects\Lab_12_variant_1\Lab_12_variant_1\obj\x86\Debug\Lab_12_variant_1.csproj.GenerateResource.Cache
+c:\users\2882_tsukanov\documents\visual studio 2010\Projects\Lab_12_variant_1\Lab_12_variant_1\obj\x86\Debug\Lab_12_variant_1.exe
+c:\users\2882_tsukanov\documents\visual studio 2010\Projects\Lab_12_variant_1\Lab_12_variant_1\obj\x86\Debug\Lab_12_variant_1.pdb
+c:\users\2882_tsukanov\documents\visual studio 2010\Projects\Lab_12_variant_1\Lab_12_variant_1\obj\x86\Debug\Lab_12_variant_1.Calc.resources
+c:\users\2882_tsukanov\documents\visual studio 2010\Projects\Lab_12_variant_1\Lab_12_variant_1\obj\x86\Debug\Lab_12_variant_1.Input.resources
+C:\Users\2882_tsukanov\Documents\Visual Studio 2010\Projects\Lab_12_variant_1\Lab_12_variant_1\obj\x86\Debug\Lab_12_variant_1.csprojResolveAssemblyReference.cache
+C:\Users\2882_tsukanov\documents\visual studio 2010\Projects\Lab_12_variant_1\Lab_12_variant_1\obj\x86\Debug\Interop.GrooveCryptoServices.dll
+C:\Users\2882_tsukanov\documents\visual studio 2010\Projects\Lab_12_variant_1\Lab_12_variant_1\obj\x86\Debug\Lab_12_variant_1.csproj.ResolveComReference.cache
