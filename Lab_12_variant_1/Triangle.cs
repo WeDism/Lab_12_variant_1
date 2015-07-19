@@ -9,6 +9,9 @@ namespace Lab_12_variant_1
     {
         double a, b, c;
         double? area, perimeter;
+        public Triangle()
+        {
+        }
         public Triangle(double a, double b, double c)
         {
             this.a = a;

@@ -15,20 +15,19 @@ namespace Lab_12_variant_1
     partial class Calc : PerentForm
     {
         bool logic = false;
-        int count = linkedListTypesCalculation.Count;
         public Calc()
         {
             InitializeComponent();
             CancelButton = buttonClose;
             if (onlyOne)
             {
+                if (linkedListTypesCalculation.ElementAt(0).Area != null)
+                    dataGridViewTypeCalculated.Rows.Add("Only first", "Area",
+                        string.Format("{0,8:0.####}", linkedListTypesCalculation.ElementAt(0).Area));
                 checkBoxViewMyOnlyPastInput.Visible = false;
                 if (linkedListTypesCalculation.ElementAt(0).Perimeter != null)
                     dataGridViewTypeCalculated.Rows.Add("Only first", "Perimeter",
                         string.Format("{0,8:0.####}", linkedListTypesCalculation.ElementAt(0).Perimeter));
-                if (linkedListTypesCalculation.ElementAt(0).Area != null)
-                    dataGridViewTypeCalculated.Rows.Add("Only first", "Area",
-                        string.Format("{0,8:0.####}", linkedListTypesCalculation.ElementAt(0).Area));
             }
             else if (addCollection)
             {
@@ -39,14 +38,14 @@ namespace Lab_12_variant_1
 
         private void AddCollectionLinkedList()
         {
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < linkedListTypesCalculation.Count; i++)
             {
-                if (linkedListTypesCalculation.ElementAt(i).Perimeter != null)
-                    dataGridViewTypeCalculated.Rows.Add(i + 1, "Perimeter",
-                        string.Format("{0,8:0.####}", linkedListTypesCalculation.ElementAt(i).Perimeter));
                 if (linkedListTypesCalculation.ElementAt(i).Area != null)
                     dataGridViewTypeCalculated.Rows.Add(i + 1, "Area",
                         string.Format("{0,8:0.####}", linkedListTypesCalculation.ElementAt(i).Area));
+                if (linkedListTypesCalculation.ElementAt(i).Perimeter != null)
+                    dataGridViewTypeCalculated.Rows.Add(i + 1, "Perimeter",
+                        string.Format("{0,8:0.####}", linkedListTypesCalculation.ElementAt(i).Perimeter));
             }
         }
 
@@ -65,12 +64,12 @@ namespace Lab_12_variant_1
             if (checkBoxViewMyOnlyPastInput.Checked)
             {
                 dataGridViewTypeCalculated.Rows.Clear();
-                if (linkedListTypesCalculation.ElementAt(count - 1).Perimeter != null)
-                    dataGridViewTypeCalculated.Rows.Add("Last element", "Perimeter",
-                        string.Format("{0,8:0.####}", linkedListTypesCalculation.ElementAt(count - 1).Perimeter));
-                if (linkedListTypesCalculation.ElementAt(count - 1).Area != null)
+                if (linkedListTypesCalculation.ElementAt(linkedListTypesCalculation.Count - 1).Area != null)
                     dataGridViewTypeCalculated.Rows.Add("Last element", "Area",
-                        string.Format("{0,8:0.####}", linkedListTypesCalculation.ElementAt(count - 1).Area));
+                        string.Format("{0,8:0.####}", linkedListTypesCalculation.ElementAt(linkedListTypesCalculation.Count - 1).Area));
+                if (linkedListTypesCalculation.ElementAt(linkedListTypesCalculation.Count - 1).Perimeter != null)
+                    dataGridViewTypeCalculated.Rows.Add("Last element", "Perimeter",
+                        string.Format("{0,8:0.####}", linkedListTypesCalculation.ElementAt(linkedListTypesCalculation.Count - 1).Perimeter));
             }
             else
             {
@@ -126,11 +125,20 @@ namespace Lab_12_variant_1
 
                 if (Open.ShowDialog() == DialogResult.OK)
                 {
+                    StreamOpenDataGridView SODGV = null;
                     try
                     {
-                        StreamOpenDataGridView SODGV = new StreamOpenDataGridView(Open.FileName);
-                        AddCollectionList(SODGV);
-                        
+                        linkedListTypesCalculation.Clear();
+                        SODGV = new StreamOpenDataGridView(Open.FileName);
+                        linkedListTypesCalculation = SODGV.ReturnTriangles;
+                        dataGridViewTypeCalculated.Rows.Clear();
+                        AddCollectionLinkedList();
+
+                    }
+                    catch (FormatException exc)
+                    {
+                        AddCollectionStreamOpen(SODGV);
+                        MessageBox.Show(exc.Message);
                     }
                     catch (Exception ex)
                     {
@@ -140,10 +148,10 @@ namespace Lab_12_variant_1
 #endif
             }
         }
-        private void AddCollectionList(StreamOpenDataGridView _object)
+        private void AddCollectionStreamOpen(StreamOpenDataGridView _object)
         {
             dataGridViewTypeCalculated.Rows.Clear();
-            List<ConstructRow> list = _object.ReturnList;
+            List<ConstructRow> list = _object.ReturnLinkedListStreamOpen;
             int counter = list.Count;
             for (int i = 0; i < counter; i++)
             {
