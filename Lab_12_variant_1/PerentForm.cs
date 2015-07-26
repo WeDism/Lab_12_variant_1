@@ -9,7 +9,7 @@ namespace Lab_12_variant_1
     class PerentForm : Form
     {
         protected static double a, b, c;
-        protected static bool perimeter, area, addCollection, onlyOne;
+        protected static bool perimeter, area, addCollection, onlyOne, test = true;
         protected static LinkedList<Triangle> linkedListTypesCalculation = new LinkedList<Triangle>();
     }
 }

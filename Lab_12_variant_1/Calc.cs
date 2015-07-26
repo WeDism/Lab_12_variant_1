@@ -166,7 +166,7 @@ namespace Lab_12_variant_1
                     }
                     catch (FormatException exc)
                     {
-                        AddCollectionStreamOpen(SODGV);
+                        //AddCollectionStreamOpen(SODGV);
                         MessageBox.Show(exc.Message);
                     }
                     catch (Exception ex)

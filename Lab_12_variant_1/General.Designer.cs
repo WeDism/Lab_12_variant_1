@@ -89,7 +89,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "General";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.General_FormClosed);
+            //this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.General_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

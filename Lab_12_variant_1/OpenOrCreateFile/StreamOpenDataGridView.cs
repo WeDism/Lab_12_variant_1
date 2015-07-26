@@ -35,6 +35,7 @@ namespace Lab_12_variant_1.OpenOrCreateFile
         {
             StreamReader streamReader = new StreamReader(fileFolder);
             string textFromFile = streamReader.ReadToEnd();
+            streamReader.Close();
             Regex regular = new Regex(@"\d+\t(Area)*(Perimeter)*\t *\d+\,*\.*\d*\r\n");
             regularSeach = regular.Match(textFromFile);
             int counter = CountRows(textFromFile);
@@ -95,67 +96,71 @@ namespace Lab_12_variant_1.OpenOrCreateFile
             }
             regularSeach = regularSeach.NextMatch();
         }
-        private void CheckTriangleTransform(List<ConstructRow> ListStreamOpen)
+        private List<List<int>> CheckTriangleTransform(List<ConstructRow> ListStreamOpen)
         {
             int length = ListStreamOpen.Count;
+            List<List<int>> strNumbers = new List<List<int>>();
+            int index = 0;
             for (int i = 0; i < length - 1; i++)
             {
                 int counterNumbers = 0;
+                strNumbers.Add(new List<int>());
                 for (int j = i + 1; j < length; j++)
                 {
                     if (ListStreamOpen.ElementAt(i) == ListStreamOpen.ElementAt(j))
                     {
                         counterNumbers++;
+                        strNumbers[index].Add(i);
+                        strNumbers[index].Add(j);
+                    }
+                    else
+                    {
+                        //bool first = !(strNumbers[index].Contains(i) && strNumbers[index].Contains(j));
+                        //bool second = !strNumbers[index].Contains(i);
+                        if (!(strNumbers[index].Contains(i) && strNumbers[index].Contains(j)) && !strNumbers[index].Contains(i))
+                        {
+                            strNumbers[index].Add(i);
+                            strNumbers[index].Add(i);
+                        }
                     }
                 }
                 if (counterNumbers > 1)
                     throw new FormatException();
+                index++;
             }
+            return strNumbers;
         }
         private LinkedList<Triangle> TriangleTransform(List<ConstructRow> ListStreamOpen)
         {
-            CheckTriangleTransform(ListStreamOpen);
-            int length = ListStreamOpen.Count;
-            List<int> strNumbers = new List<int>();
-            for (int i = 0; i < length - 1; i++)
+            List<List<int>> strNumbers = CheckTriangleTransform(ListStreamOpen);
+            int length = strNumbers.Count;
+            for (int i = 0; i < length; i++)
             {
-                for (int j = i + 1; j < length; j++)
+                Triangle triangle = new Triangle();
+                if (strNumbers[i][0] != strNumbers[i][1])
                 {
-                    if (ListStreamOpen.ElementAt(i) == ListStreamOpen.ElementAt(j))
-                    {
-                        strNumbers.Add((int)ListStreamOpen.ElementAt(i).StrNumber);
-                        Triangle triangle = new Triangle();
-                        triangle.Area = ListStreamOpen.ElementAt(i).StrTypeCalculation.Equals("Area") ?
-                            ListStreamOpen.ElementAt(i).StrValue : null;
-                        triangle.Perimeter = ListStreamOpen.ElementAt(j).StrTypeCalculation.Equals("Perimeter") ?
-                            ListStreamOpen.ElementAt(j).StrValue : null;
-                        if (!ListStreamOpen.ElementAt(i).StrTypeCalculation.Equals("Area"))
-                            triangle.Perimeter = ListStreamOpen.ElementAt(i).StrTypeCalculation.Equals("Perimeter") ?
-                                ListStreamOpen.ElementAt(i).StrValue : null;
-                        if (!ListStreamOpen.ElementAt(j).StrTypeCalculation.Equals("Perimeter"))
-                            triangle.Perimeter = ListStreamOpen.ElementAt(j).StrTypeCalculation.Equals("Area") ?
-                                ListStreamOpen.ElementAt(j).StrValue : null;
-                        Triangles.AddLast(triangle);
-                    }
+                    triangle.Area = ListStreamOpen.ElementAt(strNumbers[i][0]).StrTypeCalculation.Equals("Area") ?
+                        ListStreamOpen.ElementAt(strNumbers[i][0]).StrValue : null;
+                    triangle.Perimeter = ListStreamOpen.ElementAt(strNumbers[i][1]).StrTypeCalculation.Equals("Perimeter") ?
+                        ListStreamOpen.ElementAt(strNumbers[i][1]).StrValue : null;
+                    if (!ListStreamOpen.ElementAt(strNumbers[i][0]).StrTypeCalculation.Equals("Area"))
+                        triangle.Perimeter = ListStreamOpen.ElementAt(strNumbers[i][0]).StrTypeCalculation.Equals("Perimeter") ?
+                            ListStreamOpen.ElementAt(strNumbers[i][0]).StrValue : null;
+                    if (!ListStreamOpen.ElementAt(strNumbers[i][1]).StrTypeCalculation.Equals("Perimeter"))
+                        triangle.Perimeter = ListStreamOpen.ElementAt(strNumbers[i][1]).StrTypeCalculation.Equals("Area") ?
+                            ListStreamOpen.ElementAt(strNumbers[i][1]).StrValue : null;
+                    Triangles.AddLast(triangle);
                 }
-            }
-            EndTriangleTransform(strNumbers);
-            return Triangles;
-        }
-        private void EndTriangleTransform(List<int> strNumbers)
-        {
-            for (int i = 0; i < ListStreamOpen.Count - strNumbers.Count; i++)
-            {
-                if (!strNumbers.Contains((int)ListStreamOpen.ElementAt(i).StrNumber))
+                else
                 {
-                    Triangle triangle = new Triangle();
                     triangle.Area = ListStreamOpen.ElementAt(i).StrTypeCalculation.Equals("Area") ?
-                        ListStreamOpen.ElementAt(i).StrValue : null;
+                          ListStreamOpen.ElementAt(i).StrValue : null;
                     triangle.Perimeter = ListStreamOpen.ElementAt(i).StrTypeCalculation.Equals("Perimeter") ?
                         ListStreamOpen.ElementAt(i).StrValue : null;
                     Triangles.AddLast(triangle);
                 }
             }
+            return Triangles;
         }
         private LinkedList<Triangle> TriangleTransform(string fileFolder)
         {
@@ -166,6 +171,9 @@ namespace Lab_12_variant_1.OpenOrCreateFile
                 if (xmlReader.Name == "Triangle")
                 {
                     Triangle triangle = new Triangle();
+                    xmlReader.Read();
+                    xmlReader.Read();
+                    xmlReader.Read();
                     xmlReader.Read();
                     if (xmlReader.Name == "Area")
                     {

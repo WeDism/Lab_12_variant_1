@@ -24,6 +24,7 @@ namespace Lab_12_variant_1
             checkBoxArea.Checked = area;
             radioButtonAddCollection.Checked = addCollection;
             radioButtonOnlyFirst.Checked = onlyOne;
+            checkBoxTest.Checked = test;
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -112,6 +113,7 @@ namespace Lab_12_variant_1
             addCollection = radioButtonAddCollection.Checked;
             perimeter = checkBoxPerimeter.Checked;
             area = checkBoxArea.Checked;
+            test = checkBoxTest.Checked;
 
             if (isClose) this.Close();
         }
@@ -137,11 +139,43 @@ namespace Lab_12_variant_1
                     numericUpDownB.Value = 0m;
                     numericUpDownC.Value = 0m;
                     a = 0;
+                    b = 0;
+                    c = 0;
                     checkBoxPerimeter.Checked = false;
                     checkBoxArea.Checked = false;
                     radioButtonAddCollection.Checked = false;
                     radioButtonOnlyFirst.Checked = false;
                 }
+            }
+        }
+
+        private void checkBoxTest_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxTest.Checked)
+            {
+                groupBox1.Enabled = false;
+                groupBox2.Enabled = false;
+                groupBox3.Enabled = false;
+                numericUpDownA.Value = 6m;
+                numericUpDownB.Value = 7m;
+                numericUpDownC.Value = 8m;
+                checkBoxPerimeter.Checked = true;
+                checkBoxArea.Checked = true;
+                radioButtonAddCollection.Checked = true;
+                radioButtonOnlyFirst.Checked = false;
+            }
+            else
+            {
+                groupBox1.Enabled = true;
+                groupBox2.Enabled = true;
+                groupBox3.Enabled = true;
+                numericUpDownA.Value = (decimal)a;
+                numericUpDownB.Value = (decimal)b;
+                numericUpDownC.Value = (decimal)c;
+                checkBoxPerimeter.Checked = perimeter;
+                checkBoxArea.Checked = area;
+                radioButtonAddCollection.Checked = addCollection;
+                radioButtonOnlyFirst.Checked = onlyOne;
             }
         }
     }

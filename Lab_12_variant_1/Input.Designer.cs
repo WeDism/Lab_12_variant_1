@@ -28,59 +28,99 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelA = new System.Windows.Forms.Label();
-            this.labelB = new System.Windows.Forms.Label();
-            this.labelC = new System.Windows.Forms.Label();
+            this.checkBoxTest = new System.Windows.Forms.CheckBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.radioButtonAddCollection = new System.Windows.Forms.RadioButton();
+            this.radioButtonOnlyFirst = new System.Windows.Forms.RadioButton();
+            this.buttonClear = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkBoxPerimeter = new System.Windows.Forms.CheckBox();
             this.checkBoxArea = new System.Windows.Forms.CheckBox();
-            this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonOK = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.numericUpDownC = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownB = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownA = new System.Windows.Forms.NumericUpDown();
-            this.buttonClear = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.radioButtonAddCollection = new System.Windows.Forms.RadioButton();
-            this.radioButtonOnlyFirst = new System.Windows.Forms.RadioButton();
+            this.labelC = new System.Windows.Forms.Label();
+            this.labelA = new System.Windows.Forms.Label();
+            this.labelB = new System.Windows.Forms.Label();
+            this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownA)).BeginInit();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
-            // labelA
+            // checkBoxTest
             // 
-            this.labelA.AutoSize = true;
-            this.labelA.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelA.Location = new System.Drawing.Point(12, 29);
-            this.labelA.Name = "labelA";
-            this.labelA.Size = new System.Drawing.Size(71, 24);
-            this.labelA.TabIndex = 3;
-            this.labelA.Text = "Side A:";
+            this.checkBoxTest.AutoSize = true;
+            this.checkBoxTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBoxTest.Location = new System.Drawing.Point(131, 313);
+            this.checkBoxTest.Name = "checkBoxTest";
+            this.checkBoxTest.Size = new System.Drawing.Size(64, 24);
+            this.checkBoxTest.TabIndex = 9;
+            this.checkBoxTest.Text = "Test";
+            this.checkBoxTest.UseVisualStyleBackColor = true;
+            this.checkBoxTest.CheckedChanged += new System.EventHandler(this.checkBoxTest_CheckedChanged);
             // 
-            // labelB
+            // groupBox3
             // 
-            this.labelB.AutoSize = true;
-            this.labelB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelB.Location = new System.Drawing.Point(12, 80);
-            this.labelB.Name = "labelB";
-            this.labelB.Size = new System.Drawing.Size(70, 24);
-            this.labelB.TabIndex = 4;
-            this.labelB.Text = "Side B:";
+            this.groupBox3.Controls.Add(this.radioButtonAddCollection);
+            this.groupBox3.Controls.Add(this.radioButtonOnlyFirst);
+            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupBox3.Location = new System.Drawing.Point(12, 184);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(305, 55);
+            this.groupBox3.TabIndex = 12;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Type view";
             // 
-            // labelC
+            // radioButtonAddCollection
             // 
-            this.labelC.AutoSize = true;
-            this.labelC.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelC.Location = new System.Drawing.Point(12, 131);
-            this.labelC.Name = "labelC";
-            this.labelC.Size = new System.Drawing.Size(71, 24);
-            this.labelC.TabIndex = 5;
-            this.labelC.Text = "Side C:";
+            this.radioButtonAddCollection.AutoSize = true;
+            this.radioButtonAddCollection.Checked = true;
+            this.radioButtonAddCollection.Location = new System.Drawing.Point(164, 25);
+            this.radioButtonAddCollection.Name = "radioButtonAddCollection";
+            this.radioButtonAddCollection.Size = new System.Drawing.Size(135, 24);
+            this.radioButtonAddCollection.TabIndex = 10;
+            this.radioButtonAddCollection.TabStop = true;
+            this.radioButtonAddCollection.Text = "Add collection";
+            this.radioButtonAddCollection.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonOnlyFirst
+            // 
+            this.radioButtonOnlyFirst.AutoSize = true;
+            this.radioButtonOnlyFirst.Location = new System.Drawing.Point(6, 25);
+            this.radioButtonOnlyFirst.Name = "radioButtonOnlyFirst";
+            this.radioButtonOnlyFirst.Size = new System.Drawing.Size(98, 24);
+            this.radioButtonOnlyFirst.TabIndex = 9;
+            this.radioButtonOnlyFirst.Text = "Only first";
+            this.radioButtonOnlyFirst.UseVisualStyleBackColor = true;
+            // 
+            // buttonClear
+            // 
+            this.buttonClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonClear.Location = new System.Drawing.Point(12, 251);
+            this.buttonClear.Name = "buttonClear";
+            this.buttonClear.Size = new System.Drawing.Size(54, 49);
+            this.buttonClear.TabIndex = 13;
+            this.buttonClear.Text = "Clear";
+            this.buttonClear.UseVisualStyleBackColor = true;
+            this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.checkBoxPerimeter);
+            this.groupBox1.Controls.Add(this.checkBoxArea);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupBox1.Location = new System.Drawing.Point(68, 245);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(249, 55);
+            this.groupBox1.TabIndex = 11;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Type calculation";
             // 
             // checkBoxPerimeter
             // 
@@ -104,17 +144,6 @@
             this.checkBoxArea.Text = "Area";
             this.checkBoxArea.UseVisualStyleBackColor = true;
             // 
-            // buttonOK
-            // 
-            this.buttonOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonOK.Location = new System.Drawing.Point(12, 306);
-            this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(92, 34);
-            this.buttonOK.TabIndex = 9;
-            this.buttonOK.Text = "OK";
-            this.buttonOK.UseVisualStyleBackColor = true;
-            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
-            // 
             // buttonCancel
             // 
             this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -125,17 +154,16 @@
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // buttonOK
             // 
-            this.groupBox1.Controls.Add(this.checkBoxPerimeter);
-            this.groupBox1.Controls.Add(this.checkBoxArea);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupBox1.Location = new System.Drawing.Point(68, 245);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(249, 55);
-            this.groupBox1.TabIndex = 11;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Type calculation";
+            this.buttonOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonOK.Location = new System.Drawing.Point(12, 306);
+            this.buttonOK.Name = "buttonOK";
+            this.buttonOK.Size = new System.Drawing.Size(92, 34);
+            this.buttonOK.TabIndex = 9;
+            this.buttonOK.Text = "OK";
+            this.buttonOK.UseVisualStyleBackColor = true;
+            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // groupBox2
             // 
@@ -207,57 +235,43 @@
             this.numericUpDownA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numericUpDownA.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
             // 
-            // buttonClear
+            // labelC
             // 
-            this.buttonClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonClear.Location = new System.Drawing.Point(12, 251);
-            this.buttonClear.Name = "buttonClear";
-            this.buttonClear.Size = new System.Drawing.Size(54, 49);
-            this.buttonClear.TabIndex = 13;
-            this.buttonClear.Text = "Clear";
-            this.buttonClear.UseVisualStyleBackColor = true;
-            this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
+            this.labelC.AutoSize = true;
+            this.labelC.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelC.Location = new System.Drawing.Point(12, 131);
+            this.labelC.Name = "labelC";
+            this.labelC.Size = new System.Drawing.Size(71, 24);
+            this.labelC.TabIndex = 5;
+            this.labelC.Text = "Side C:";
             // 
-            // groupBox3
+            // labelA
             // 
-            this.groupBox3.Controls.Add(this.radioButtonAddCollection);
-            this.groupBox3.Controls.Add(this.radioButtonOnlyFirst);
-            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupBox3.Location = new System.Drawing.Point(12, 184);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(305, 55);
-            this.groupBox3.TabIndex = 12;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Type view";
+            this.labelA.AutoSize = true;
+            this.labelA.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelA.Location = new System.Drawing.Point(12, 29);
+            this.labelA.Name = "labelA";
+            this.labelA.Size = new System.Drawing.Size(71, 24);
+            this.labelA.TabIndex = 3;
+            this.labelA.Text = "Side A:";
             // 
-            // radioButtonAddCollection
+            // labelB
             // 
-            this.radioButtonAddCollection.AutoSize = true;
-            this.radioButtonAddCollection.Checked = true;
-            this.radioButtonAddCollection.Location = new System.Drawing.Point(164, 25);
-            this.radioButtonAddCollection.Name = "radioButtonAddCollection";
-            this.radioButtonAddCollection.Size = new System.Drawing.Size(135, 24);
-            this.radioButtonAddCollection.TabIndex = 10;
-            this.radioButtonAddCollection.TabStop = true;
-            this.radioButtonAddCollection.Text = "Add collection";
-            this.radioButtonAddCollection.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonOnlyFirst
-            // 
-            this.radioButtonOnlyFirst.AutoSize = true;
-            this.radioButtonOnlyFirst.Location = new System.Drawing.Point(6, 25);
-            this.radioButtonOnlyFirst.Name = "radioButtonOnlyFirst";
-            this.radioButtonOnlyFirst.Size = new System.Drawing.Size(98, 24);
-            this.radioButtonOnlyFirst.TabIndex = 9;
-            this.radioButtonOnlyFirst.Text = "Only first";
-            this.radioButtonOnlyFirst.UseVisualStyleBackColor = true;
+            this.labelB.AutoSize = true;
+            this.labelB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelB.Location = new System.Drawing.Point(12, 80);
+            this.labelB.Name = "labelB";
+            this.labelB.Size = new System.Drawing.Size(70, 24);
+            this.labelB.TabIndex = 4;
+            this.labelB.Text = "Side B:";
             // 
             // Input
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(325, 343);
+            this.ClientSize = new System.Drawing.Size(329, 345);
             this.ControlBox = false;
+            this.Controls.Add(this.checkBoxTest);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.buttonClear);
             this.Controls.Add(this.groupBox1);
@@ -271,6 +285,8 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Input";
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -278,9 +294,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownA)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -302,6 +317,7 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RadioButton radioButtonAddCollection;
         private System.Windows.Forms.RadioButton radioButtonOnlyFirst;
+        private System.Windows.Forms.CheckBox checkBoxTest;
 
     }
 }
