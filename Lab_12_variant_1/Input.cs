@@ -136,6 +136,7 @@ namespace Lab_12_variant_1
                     numericUpDownA.Value = 0m;
                     numericUpDownB.Value = 0m;
                     numericUpDownC.Value = 0m;
+                    a = 0;
                     checkBoxPerimeter.Checked = false;
                     checkBoxArea.Checked = false;
                     radioButtonAddCollection.Checked = false;

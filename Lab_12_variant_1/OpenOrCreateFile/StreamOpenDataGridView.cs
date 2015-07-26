@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Xml;
 
 namespace Lab_12_variant_1.OpenOrCreateFile
 {
@@ -13,11 +14,22 @@ namespace Lab_12_variant_1.OpenOrCreateFile
         static List<ConstructRow> ListStreamOpen = new List<ConstructRow>();
         static LinkedList<Triangle> Triangles = new LinkedList<Triangle>();
         Match regularSeach;
-        public StreamOpenDataGridView(string fileFolder)
+        public enum OpenAs
         {
-            ListStreamOpen.Clear();
-            ListStreamOpen = CreateList(fileFolder);
-            Triangles = TriangleTransform(ListStreamOpen);
+            None, txt, xml
+        }
+        public StreamOpenDataGridView(string fileFolder, OpenAs openAs)
+        {
+            if (openAs.Equals(OpenAs.None) || openAs.Equals(OpenAs.txt))
+            {
+                ListStreamOpen.Clear();
+                ListStreamOpen = CreateList(fileFolder);
+                Triangles = TriangleTransform(ListStreamOpen);
+            }
+            else if (openAs.Equals(OpenAs.xml))
+                Triangles = TriangleTransform(fileFolder);
+            else throw new ArgumentException();
+
         }
         private List<ConstructRow> CreateList(string fileFolder)
         {
@@ -104,21 +116,69 @@ namespace Lab_12_variant_1.OpenOrCreateFile
         {
             CheckTriangleTransform(ListStreamOpen);
             int length = ListStreamOpen.Count;
+            List<int> strNumbers = new List<int>();
             for (int i = 0; i < length - 1; i++)
             {
                 for (int j = i + 1; j < length; j++)
                 {
                     if (ListStreamOpen.ElementAt(i) == ListStreamOpen.ElementAt(j))
                     {
+                        strNumbers.Add((int)ListStreamOpen.ElementAt(i).StrNumber);
                         Triangle triangle = new Triangle();
                         triangle.Area = ListStreamOpen.ElementAt(i).StrTypeCalculation.Equals("Area") ?
                             ListStreamOpen.ElementAt(i).StrValue : null;
                         triangle.Perimeter = ListStreamOpen.ElementAt(j).StrTypeCalculation.Equals("Perimeter") ?
                             ListStreamOpen.ElementAt(j).StrValue : null;
+                        if (!ListStreamOpen.ElementAt(i).StrTypeCalculation.Equals("Area"))
+                            triangle.Perimeter = ListStreamOpen.ElementAt(i).StrTypeCalculation.Equals("Perimeter") ?
+                                ListStreamOpen.ElementAt(i).StrValue : null;
+                        if (!ListStreamOpen.ElementAt(j).StrTypeCalculation.Equals("Perimeter"))
+                            triangle.Perimeter = ListStreamOpen.ElementAt(j).StrTypeCalculation.Equals("Area") ?
+                                ListStreamOpen.ElementAt(j).StrValue : null;
                         Triangles.AddLast(triangle);
                     }
                 }
             }
+            EndTriangleTransform(strNumbers);
+            return Triangles;
+        }
+        private void EndTriangleTransform(List<int> strNumbers)
+        {
+            for (int i = 0; i < ListStreamOpen.Count - strNumbers.Count; i++)
+            {
+                if (!strNumbers.Contains((int)ListStreamOpen.ElementAt(i).StrNumber))
+                {
+                    Triangle triangle = new Triangle();
+                    triangle.Area = ListStreamOpen.ElementAt(i).StrTypeCalculation.Equals("Area") ?
+                        ListStreamOpen.ElementAt(i).StrValue : null;
+                    triangle.Perimeter = ListStreamOpen.ElementAt(i).StrTypeCalculation.Equals("Perimeter") ?
+                        ListStreamOpen.ElementAt(i).StrValue : null;
+                    Triangles.AddLast(triangle);
+                }
+            }
+        }
+        private LinkedList<Triangle> TriangleTransform(string fileFolder)
+        {
+            StreamReader stream = new StreamReader(fileFolder);
+            XmlReader xmlReader = new XmlTextReader(stream);
+            while (xmlReader.Read())
+            {
+                if (xmlReader.Name == "Triangle")
+                {
+                    Triangle triangle = new Triangle();
+                    xmlReader.Read();
+                    if (xmlReader.Name == "Area")
+                    {
+                        triangle.Area = double.Parse(xmlReader.ReadElementString());
+                    }
+                    if (xmlReader.Name == "Perimeter")
+                    {
+                        triangle.Perimeter = double.Parse(xmlReader.ReadElementString());
+                    }
+                    Triangles.AddLast(triangle);
+                }
+            }
+            xmlReader.Close();
             return Triangles;
         }
         public List<ConstructRow> ReturnLinkedListStreamOpen

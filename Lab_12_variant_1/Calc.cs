@@ -83,7 +83,8 @@ namespace Lab_12_variant_1
             if (comboBoxWorkWithExcel.SelectedItem.ToString() == "Save")
             {
                 SaveFileDialog Save = new SaveFileDialog();
-                Save.Filter = "txt files (*.txt)|*.txt|xls files (*.xls)|*.xls|All files (*.*)|*.*";
+                Save.Filter =
+                    "xml files (*.xml)|*.xml|txt files (*.txt)|*.txt|xls files (*.xls)|*.xls|All files (*.*)|*.*";
                 Save.FilterIndex = 1;
                 Save.RestoreDirectory = true;
 
@@ -94,17 +95,26 @@ namespace Lab_12_variant_1
                         if (Save.FilterIndex == 1)
                         {
                             StreamSaveDataGridView bSDGV =
-                                new StreamSaveDataGridView(linkedListTypesCalculation, Save.FileName);
+                                new StreamSaveDataGridView(linkedListTypesCalculation, Save.FileName,
+                                    StreamSaveDataGridView.SaveAs.xml);
                         }
                         if (Save.FilterIndex == 2)
                         {
                             StreamSaveDataGridView bSDGV =
-                                new StreamSaveDataGridView(linkedListTypesCalculation, Save.FileName);
+                                new StreamSaveDataGridView(linkedListTypesCalculation, Save.FileName,
+                                    StreamSaveDataGridView.SaveAs.xls);
                         }
                         if (Save.FilterIndex == 3)
                         {
                             StreamSaveDataGridView bSDGV =
-                                new StreamSaveDataGridView(linkedListTypesCalculation, Save.FileName);
+                                new StreamSaveDataGridView(linkedListTypesCalculation, Save.FileName,
+                                    StreamSaveDataGridView.SaveAs.txt);
+                        } 
+                        if (Save.FilterIndex == 4)
+                        {
+                            StreamSaveDataGridView bSDGV =
+                                new StreamSaveDataGridView(linkedListTypesCalculation, Save.FileName,
+                                    StreamSaveDataGridView.SaveAs.None);
                         }
                     }
                     catch (Exception ex)
@@ -119,7 +129,7 @@ namespace Lab_12_variant_1
                 MessageBox.Show("This is function is not realized", "Warning");
 #else
                 OpenFileDialog Open = new OpenFileDialog();
-                Open.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+                Open.Filter = "xml files (*.xml)|*.xml|txt files (*.txt)|*.txt|All files (*.*)|*.*";
                 Open.FilterIndex = 1;
                 Open.RestoreDirectory = true;
 
@@ -128,11 +138,30 @@ namespace Lab_12_variant_1
                     StreamOpenDataGridView SODGV = null;
                     try
                     {
-                        linkedListTypesCalculation.Clear();
-                        SODGV = new StreamOpenDataGridView(Open.FileName);
-                        linkedListTypesCalculation = SODGV.ReturnTriangles;
-                        dataGridViewTypeCalculated.Rows.Clear();
-                        AddCollectionLinkedList();
+                        if (Open.FilterIndex == 1)
+                        {
+                            linkedListTypesCalculation.Clear();
+                            SODGV = new StreamOpenDataGridView(Open.FileName, StreamOpenDataGridView.OpenAs.xml);
+                            linkedListTypesCalculation = SODGV.ReturnTriangles;
+                            dataGridViewTypeCalculated.Rows.Clear();
+                            AddCollectionLinkedList();
+                        }
+                        if (Open.FilterIndex == 2)
+                        {
+                            linkedListTypesCalculation.Clear();
+                            SODGV = new StreamOpenDataGridView(Open.FileName, StreamOpenDataGridView.OpenAs.txt);
+                            linkedListTypesCalculation = SODGV.ReturnTriangles;
+                            dataGridViewTypeCalculated.Rows.Clear();
+                            AddCollectionLinkedList();
+                        } 
+                        if (Open.FilterIndex == 3)
+                        {
+                            linkedListTypesCalculation.Clear();
+                            SODGV = new StreamOpenDataGridView(Open.FileName, StreamOpenDataGridView.OpenAs.None);
+                            linkedListTypesCalculation = SODGV.ReturnTriangles;
+                            dataGridViewTypeCalculated.Rows.Clear();
+                            AddCollectionLinkedList();
+                        }
 
                     }
                     catch (FormatException exc)

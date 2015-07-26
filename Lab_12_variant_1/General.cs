@@ -12,7 +12,6 @@ namespace Lab_12_variant_1
 {
     partial class General : PerentForm
     {
-        //public event EventHandler EH;
         public General()
         {
             InitializeComponent();
