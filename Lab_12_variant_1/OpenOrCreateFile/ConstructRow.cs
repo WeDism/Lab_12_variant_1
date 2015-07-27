@@ -24,6 +24,11 @@ namespace Lab_12_variant_1.OpenOrCreateFile
         {
             if (first.strNumber > second.strNumber) return 1;
             if (first.strNumber < second.strNumber) return -1;
+            if (first.strNumber == second.strNumber)
+            {
+                if (first.strTypeCalculation.Length > second.strTypeCalculation.Length) return 1;
+                if (first.strTypeCalculation.Length < second.strTypeCalculation.Length) return -1;
+            }
             return 0;
         }
         public override bool Equals(object obj)
@@ -48,7 +53,7 @@ namespace Lab_12_variant_1.OpenOrCreateFile
         }
         public int CompareTo(ConstructRow constructRow)
         {
-            if (strTypeCalculation.Length > constructRow.strTypeCalculation.Length) return 0;
+            if (strTypeCalculation.Length > constructRow.strTypeCalculation.Length) return 1;
             if (strTypeCalculation.Length < constructRow.strTypeCalculation.Length) return -1;
             return 0;
         }

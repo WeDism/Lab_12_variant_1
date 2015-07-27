@@ -10,41 +10,42 @@ namespace Lab_12_variant_1.OpenOrCreateFile
 {
     class StreamSaveDataGridView
     {
-        string data;
         public enum SaveAs
         {
-            None, txt, xls, xml
+            None, txt, xml, html
         }
         public StreamSaveDataGridView(LinkedList<Triangle> linkedList, string fileFolder, SaveAs saveAs)
         {
-            if (saveAs.Equals(SaveAs.txt) || saveAs.Equals(SaveAs.xls) || saveAs.Equals(SaveAs.None))
-            {
-                data = LinkedListToString(linkedList);
-                StreamWriter file = new StreamWriter(fileFolder);
-                file.WriteLine(data);
-                file.Close();
-            }
+            if (saveAs.Equals(SaveAs.txt) || saveAs.Equals(SaveAs.None))
+                LinkedListToString(linkedList, fileFolder);
+
             else if (saveAs.Equals(SaveAs.xml))
                 LinkedListToXml(linkedList, fileFolder);
+
+            else if (saveAs.Equals(SaveAs.html))
+                LinkedListToHtml(linkedList, fileFolder);
+
             else throw new ArgumentException();
         }
-        private string LinkedListToString(LinkedList<Triangle> linkedList)
+        private void LinkedListToString(LinkedList<Triangle> linkedList, string fileFolder)
         {
+            StreamWriter file = new StreamWriter(fileFolder);
             StringBuilder stringBuilder = new StringBuilder("Number\tType_Calculation\tValue\r\n");
             for (int i = 0; i < linkedList.Count; i++)
             {
-                if (linkedList.ElementAt(i).Perimeter != null)
-                {
-                    stringBuilder.Append(i + 1 + "\t" + "Perimeter\t" + string.Format("{0,8:0.####}",
-                        linkedList.ElementAt(i).Perimeter) + "\r\n");
-                }
                 if (linkedList.ElementAt(i).Area != null)
                 {
-                    stringBuilder.Append(i + 1 + "\t" + "Area\t" + string.Format("{0,8:0.####}",
+                    stringBuilder.Append(i + 1 + "\tArea\t" + string.Format("{0,8:0.####}",
                         linkedList.ElementAt(i).Area) + "\r\n");
                 }
+                if (linkedList.ElementAt(i).Perimeter != null)
+                {
+                    stringBuilder.Append(i + 1 + "\tPerimeter\t" + string.Format("{0,8:0.####}",
+                        linkedList.ElementAt(i).Perimeter) + "\r\n");
+                }
             }
-            return stringBuilder.ToString();
+            file.WriteLine(stringBuilder.ToString());
+            file.Close();
         }
         private void LinkedListToXml(LinkedList<Triangle> linkedList, string fileFolder)
         {
@@ -75,6 +76,28 @@ namespace Lab_12_variant_1.OpenOrCreateFile
                 xmlWriter.WriteEndElement();
             }
             xmlWriter.Close();
+        }
+        private void LinkedListToHtml(LinkedList<Triangle> linkedList, string fileFolder)
+        {
+            StreamWriter file = new StreamWriter(fileFolder);
+            StringBuilder stringBuilder = new StringBuilder(@"<html><head><title>Report</title></head><body>
+                                      <table border = 1> <tr><td>Number<td>Type_Calculation<td>Value</tr>");
+            for (int i = 0; i < linkedList.Count; i++)
+            {
+                if (linkedList.ElementAt(i).Area != null)
+                {
+                    stringBuilder.Append("<tr><td>" + (i + 1) + "<td>Area<td>" + string.Format("{0,8:0.####}",
+                        linkedList.ElementAt(i).Area) + "</tr>");
+                }
+                if (linkedList.ElementAt(i).Perimeter != null)
+                {
+                    stringBuilder.Append("<tr><td>" + (i + 1) + "<td>Perimeter<td>" + string.Format("{0,8:0.####}",
+                        linkedList.ElementAt(i).Perimeter) + "</tr>");
+                }
+            }
+            stringBuilder.Append("</table></body></html>");
+            file.WriteLine(stringBuilder.ToString());
+            file.Close();
         }
     }
 }

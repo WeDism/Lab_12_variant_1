@@ -163,6 +163,7 @@ namespace Lab_12_variant_1
                 checkBoxArea.Checked = true;
                 radioButtonAddCollection.Checked = true;
                 radioButtonOnlyFirst.Checked = false;
+                buttonClear.Enabled = false;
             }
             else
             {
@@ -176,6 +177,7 @@ namespace Lab_12_variant_1
                 checkBoxArea.Checked = area;
                 radioButtonAddCollection.Checked = addCollection;
                 radioButtonOnlyFirst.Checked = onlyOne;
+                buttonClear.Enabled = true;
             }
         }
     }

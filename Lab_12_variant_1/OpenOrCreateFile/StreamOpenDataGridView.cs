@@ -16,29 +16,31 @@ namespace Lab_12_variant_1.OpenOrCreateFile
         Match regularSeach;
         public enum OpenAs
         {
-            None, txt, xml
+            None, txt, xml, html
         }
         public StreamOpenDataGridView(string fileFolder, OpenAs openAs)
         {
+            ListStreamOpen.Clear();
             if (openAs.Equals(OpenAs.None) || openAs.Equals(OpenAs.txt))
-            {
-                ListStreamOpen.Clear();
-                ListStreamOpen = CreateList(fileFolder);
-                Triangles = TriangleTransform(ListStreamOpen);
-            }
+                Triangles = TriangleTransform(CreateListText(fileFolder));
+
             else if (openAs.Equals(OpenAs.xml))
                 Triangles = TriangleTransform(fileFolder);
+
+            else if (openAs.Equals(OpenAs.html))
+                Triangles = TriangleTransform(CreateListHtml(fileFolder));
+
             else throw new ArgumentException();
 
         }
-        private List<ConstructRow> CreateList(string fileFolder)
+        private List<ConstructRow> CreateListText(string fileFolder)
         {
             StreamReader streamReader = new StreamReader(fileFolder);
             string textFromFile = streamReader.ReadToEnd();
             streamReader.Close();
-            Regex regular = new Regex(@"\d+\t(Area)*(Perimeter)*\t *\d+\,*\.*\d*\r\n");
+            Regex regular = new Regex(@"\d+\t(Area)*(Perimeter)*\t\s*\d+\,*\.*\d*\r\n");
             regularSeach = regular.Match(textFromFile);
-            int counter = CountRows(textFromFile);
+            int counter = CountRowsText(textFromFile);
             while (regularSeach.Success)
             {
                 DisasembleRegularSeach(regularSeach.Value);
@@ -47,7 +49,7 @@ namespace Lab_12_variant_1.OpenOrCreateFile
             ListStreamOpen.Sort(constrictRow);
             return ListStreamOpen;
         }
-        private int CountRows(string stringText)
+        private int CountRowsText(string stringText)
         {
             Regex regularOnlyOne = new Regex("(Number\tType_Calculation\tValue\r\n){1}");
             Regex regularRN = new Regex("\r\n");
@@ -117,7 +119,8 @@ namespace Lab_12_variant_1.OpenOrCreateFile
                     {
                         //bool first = !(strNumbers[index].Contains(i) && strNumbers[index].Contains(j));
                         //bool second = !strNumbers[index].Contains(i);
-                        if (!(strNumbers[index].Contains(i) && strNumbers[index].Contains(j)) && !strNumbers[index].Contains(i))
+                        if (!(strNumbers[index].Contains(i) && strNumbers[index].Contains(j)) &&
+                            !(strNumbers[index].Contains(i) || strNumbers[index].Contains(j)))
                         {
                             strNumbers[index].Add(i);
                             strNumbers[index].Add(i);
@@ -133,7 +136,7 @@ namespace Lab_12_variant_1.OpenOrCreateFile
         private LinkedList<Triangle> TriangleTransform(List<ConstructRow> ListStreamOpen)
         {
             List<List<int>> strNumbers = CheckTriangleTransform(ListStreamOpen);
-            int length = strNumbers.Count;
+            int length = ListStreamOpen.Count;
             for (int i = 0; i < length; i++)
             {
                 Triangle triangle = new Triangle();
@@ -188,6 +191,39 @@ namespace Lab_12_variant_1.OpenOrCreateFile
             }
             xmlReader.Close();
             return Triangles;
+        }
+        private List<ConstructRow> CreateListHtml(string fileFolder)
+        {
+            StreamReader streamReader = new StreamReader(fileFolder);
+            string textFromFile = streamReader.ReadToEnd();
+            streamReader.Close();
+            Regex regular = new Regex(@"(<td>)\d+(</td>)(<td>Area</td>)*(<td>Perimeter</td>)*(<td>)\s*\d+\,*\.*\d*(</td>)");
+            regularSeach = regular.Match(textFromFile);
+            int counter = CountRowsHtml(textFromFile);
+            while (regularSeach.Success)
+            {
+                DisasembleRegularSeach(regularSeach.Value);
+            }
+            ConstructRow constrictRow = new ConstructRow();
+            ListStreamOpen.Sort(constrictRow);
+            return ListStreamOpen;
+        }
+        private int CountRowsHtml(string stringText)
+        {
+            Regex regularOnlyOne = new Regex(@"(<tr><td>Number</td><td>Type_Calculation</td><td>Value</td></tr>){1}");
+            Regex regularRN = new Regex(@"</tr>");
+            Match textRNSeach = regularRN.Match(stringText);
+            int counter = -1;
+            if (regularOnlyOne.IsMatch(stringText))
+            {
+                while (textRNSeach.Success)
+                {
+                    counter++;
+                    textRNSeach = textRNSeach.NextMatch();
+                }
+            }
+            else throw new FormatException();
+            return counter;
         }
         public List<ConstructRow> ReturnLinkedListStreamOpen
         {

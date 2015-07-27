@@ -1,0 +1,7 @@
+Number	Type_Calculation	Value
+1	Area	  34,197
+2	Perimeter	      24
+3	Area	 31,4195
+3	Perimeter	      27
+4	Perimeter	      30
+

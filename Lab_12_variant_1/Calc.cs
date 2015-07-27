@@ -84,8 +84,8 @@ namespace Lab_12_variant_1
             {
                 SaveFileDialog Save = new SaveFileDialog();
                 Save.Filter =
-                    "xml files (*.xml)|*.xml|txt files (*.txt)|*.txt|xls files (*.xls)|*.xls|All files (*.*)|*.*";
-                Save.FilterIndex = 1;
+                    "xml files (*.xml)|*.xml|txt files (*.txt)|*.txt|html files (*.html)|*.html|All files (*.*)|*.*";
+                Save.FilterIndex = 3;
                 Save.RestoreDirectory = true;
 
                 if (Save.ShowDialog() == DialogResult.OK)
@@ -102,13 +102,13 @@ namespace Lab_12_variant_1
                         {
                             StreamSaveDataGridView bSDGV =
                                 new StreamSaveDataGridView(linkedListTypesCalculation, Save.FileName,
-                                    StreamSaveDataGridView.SaveAs.xls);
+                                    StreamSaveDataGridView.SaveAs.txt);
                         }
                         if (Save.FilterIndex == 3)
                         {
                             StreamSaveDataGridView bSDGV =
                                 new StreamSaveDataGridView(linkedListTypesCalculation, Save.FileName,
-                                    StreamSaveDataGridView.SaveAs.txt);
+                                    StreamSaveDataGridView.SaveAs.html);
                         } 
                         if (Save.FilterIndex == 4)
                         {
@@ -129,8 +129,8 @@ namespace Lab_12_variant_1
                 MessageBox.Show("This is function is not realized", "Warning");
 #else
                 OpenFileDialog Open = new OpenFileDialog();
-                Open.Filter = "xml files (*.xml)|*.xml|txt files (*.txt)|*.txt|All files (*.*)|*.*";
-                Open.FilterIndex = 1;
+                Open.Filter = "xml files (*.xml)|*.xml|txt files (*.txt)|*.txt|html files (*.html)|*.html|All files (*.*)|*.*";
+                Open.FilterIndex = 3;
                 Open.RestoreDirectory = true;
 
                 if (Open.ShowDialog() == DialogResult.OK)
@@ -153,8 +153,16 @@ namespace Lab_12_variant_1
                             linkedListTypesCalculation = SODGV.ReturnTriangles;
                             dataGridViewTypeCalculated.Rows.Clear();
                             AddCollectionLinkedList();
-                        } 
+                        }
                         if (Open.FilterIndex == 3)
+                        {
+                            linkedListTypesCalculation.Clear();
+                            SODGV = new StreamOpenDataGridView(Open.FileName, StreamOpenDataGridView.OpenAs.html);
+                            linkedListTypesCalculation = SODGV.ReturnTriangles;
+                            dataGridViewTypeCalculated.Rows.Clear();
+                            AddCollectionLinkedList();
+                        } 
+                        if (Open.FilterIndex == 4)
                         {
                             linkedListTypesCalculation.Clear();
                             SODGV = new StreamOpenDataGridView(Open.FileName, StreamOpenDataGridView.OpenAs.None);
