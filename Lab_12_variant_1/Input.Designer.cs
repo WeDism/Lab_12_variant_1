@@ -185,8 +185,6 @@
             // 
             this.numericUpDownC.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.numericUpDownC.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.numericUpDownC.Hexadecimal = true;
-            this.numericUpDownC.InterceptArrowKeys = false;
             this.numericUpDownC.Location = new System.Drawing.Point(98, 132);
             this.numericUpDownC.Maximum = new decimal(new int[] {
             100000,
@@ -203,8 +201,6 @@
             // 
             this.numericUpDownB.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.numericUpDownB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.numericUpDownB.Hexadecimal = true;
-            this.numericUpDownB.InterceptArrowKeys = false;
             this.numericUpDownB.Location = new System.Drawing.Point(98, 81);
             this.numericUpDownB.Maximum = new decimal(new int[] {
             100000,
@@ -221,8 +217,6 @@
             // 
             this.numericUpDownA.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.numericUpDownA.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.numericUpDownA.Hexadecimal = true;
-            this.numericUpDownA.InterceptArrowKeys = false;
             this.numericUpDownA.Location = new System.Drawing.Point(98, 27);
             this.numericUpDownA.Maximum = new decimal(new int[] {
             100000,
@@ -269,7 +263,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(329, 345);
+            this.ClientSize = new System.Drawing.Size(325, 341);
             this.ControlBox = false;
             this.Controls.Add(this.checkBoxTest);
             this.Controls.Add(this.groupBox3);

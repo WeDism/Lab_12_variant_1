@@ -36,12 +36,12 @@ namespace Lab_12_variant_1.OpenOrCreateFile
                 if (linkedList.ElementAt(i).Area != null)
                 {
                     stringBuilder.Append(i + 1 + "\tArea\t" + string.Format("{0,8:0.####}",
-                        linkedList.ElementAt(i).Area) + "\r\n");
+                        linkedList.ElementAt(i).Area).Trim() + "\r\n");
                 }
                 if (linkedList.ElementAt(i).Perimeter != null)
                 {
                     stringBuilder.Append(i + 1 + "\tPerimeter\t" + string.Format("{0,8:0.####}",
-                        linkedList.ElementAt(i).Perimeter) + "\r\n");
+                        linkedList.ElementAt(i).Perimeter).Trim() + "\r\n");
                 }
             }
             file.WriteLine(stringBuilder.ToString());
@@ -64,13 +64,13 @@ namespace Lab_12_variant_1.OpenOrCreateFile
                 if (linkedList.ElementAt(i).Area != null)
                 {
                     xmlWriter.WriteStartElement("Area");
-                    xmlWriter.WriteString(string.Format("{0,8:0.####}", linkedList.ElementAt(i).Area));
+                    xmlWriter.WriteString(string.Format("{0,8:0.####}", linkedList.ElementAt(i).Area).Trim());
                     xmlWriter.WriteEndElement();
                 }
                 if (linkedList.ElementAt(i).Perimeter != null)
                 {
                     xmlWriter.WriteStartElement("Perimeter");
-                    xmlWriter.WriteString(string.Format("{0,8:0.####}", linkedList.ElementAt(i).Perimeter));
+                    xmlWriter.WriteString(string.Format("{0,8:0.####}", linkedList.ElementAt(i).Perimeter).Trim());
                     xmlWriter.WriteEndElement();
                 }
                 xmlWriter.WriteEndElement();
@@ -80,19 +80,19 @@ namespace Lab_12_variant_1.OpenOrCreateFile
         private void LinkedListToHtml(LinkedList<Triangle> linkedList, string fileFolder)
         {
             StreamWriter file = new StreamWriter(fileFolder);
-            StringBuilder stringBuilder = new StringBuilder(@"<html><head><title>Report</title></head><body>
-                                      <table border = 1> <tr><td>Number<td>Type_Calculation<td>Value</tr>");
+            StringBuilder stringBuilder = new StringBuilder
+                (@"<html><head><title>Report</title></head><body><table border = 1><tr><td>Number<td>Type_Calculation<td>Value</tr>");
             for (int i = 0; i < linkedList.Count; i++)
             {
                 if (linkedList.ElementAt(i).Area != null)
                 {
-                    stringBuilder.Append("<tr><td>" + (i + 1) + "<td>Area<td>" + string.Format("{0,8:0.####}",
-                        linkedList.ElementAt(i).Area) + "</tr>");
+                    stringBuilder.Append("<tr><td>" + (i + 1) + "<td>Area<td>" + string.Format("{0,8:#.####}",
+                        linkedList.ElementAt(i).Area).Trim() + "</tr>");
                 }
                 if (linkedList.ElementAt(i).Perimeter != null)
                 {
-                    stringBuilder.Append("<tr><td>" + (i + 1) + "<td>Perimeter<td>" + string.Format("{0,8:0.####}",
-                        linkedList.ElementAt(i).Perimeter) + "</tr>");
+                    stringBuilder.Append("<tr><td>" + (i + 1) + "<td>Perimeter<td>" + string.Format("{0,8:#.####}",
+                        linkedList.ElementAt(i).Perimeter).Trim() + "</tr>");
                 }
             }
             stringBuilder.Append("</table></body></html>");

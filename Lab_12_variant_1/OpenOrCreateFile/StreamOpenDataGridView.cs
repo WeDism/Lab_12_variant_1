@@ -31,14 +31,13 @@ namespace Lab_12_variant_1.OpenOrCreateFile
                 Triangles = TriangleTransform(CreateListHtml(fileFolder));
 
             else throw new ArgumentException();
-
         }
         private List<ConstructRow> CreateListText(string fileFolder)
         {
             StreamReader streamReader = new StreamReader(fileFolder);
             string textFromFile = streamReader.ReadToEnd();
             streamReader.Close();
-            Regex regular = new Regex(@"\d+\t(Area)*(Perimeter)*\t\s*\d+\,*\.*\d*\r\n");
+            Regex regular = new Regex(@"\s*\d+\s*(Area)*(Perimeter)\s*\d+\,*\.*\d*\r\n");
             regularSeach = regular.Match(textFromFile);
             int counter = CountRowsText(textFromFile);
             while (regularSeach.Success)
@@ -51,7 +50,7 @@ namespace Lab_12_variant_1.OpenOrCreateFile
         }
         private int CountRowsText(string stringText)
         {
-            Regex regularOnlyOne = new Regex("(Number\tType_Calculation\tValue\r\n){1}");
+            Regex regularOnlyOne = new Regex(@"(\s*Number\s*Type_Calculation\s*Value\r\n){1}");
             Regex regularRN = new Regex("\r\n");
             Match textRNSeach = regularRN.Match(stringText);
             int counter = 0;
@@ -103,45 +102,49 @@ namespace Lab_12_variant_1.OpenOrCreateFile
             int length = ListStreamOpen.Count;
             List<List<int>> strNumbers = new List<List<int>>();
             int index = 0;
-            for (int i = 0; i < length - 1; i++)
+            strNumbers.Add(new List<int>());
+            for (int i = 0; i < length; i++)
             {
-                int counterNumbers = 0;
-                strNumbers.Add(new List<int>());
-                for (int j = i + 1; j < length; j++)
+                if ((i != length - 1) && (ListStreamOpen.ElementAt(i) == ListStreamOpen.ElementAt(i + 1)))
                 {
-                    if (ListStreamOpen.ElementAt(i) == ListStreamOpen.ElementAt(j))
+                    if (strNumbers.ElementAt(strNumbers.Count - 1).Count != 0)
+                        strNumbers.Add(new List<int>());
+                    strNumbers[index].Add(i);
+                    strNumbers[index].Add(i + 1);
+                    index++;
+                    i++;
+                }
+                else if (index == 0)
+                {
+                    if (!(strNumbers[index].Contains(i)))
                     {
-                        counterNumbers++;
+                        if (strNumbers.ElementAt(strNumbers.Count - 1).Count != 0)
+                            strNumbers.Add(new List<int>());
                         strNumbers[index].Add(i);
-                        strNumbers[index].Add(j);
-                    }
-                    else
-                    {
-                        //bool first = !(strNumbers[index].Contains(i) && strNumbers[index].Contains(j));
-                        //bool second = !strNumbers[index].Contains(i);
-                        if (!(strNumbers[index].Contains(i) && strNumbers[index].Contains(j)) &&
-                            !(strNumbers[index].Contains(i) || strNumbers[index].Contains(j)))
-                        {
-                            strNumbers[index].Add(i);
-                            strNumbers[index].Add(i);
-                        }
+                        strNumbers[index].Add(i);
+                        index++;
                     }
                 }
-                if (counterNumbers > 1)
-                    throw new FormatException();
-                index++;
+                else if (!(strNumbers[index - 1].Contains(i)))
+                {
+                    if (strNumbers.ElementAt(strNumbers.Count - 1).Count != 0)
+                        strNumbers.Add(new List<int>());
+                    strNumbers[index].Add(i);
+                    strNumbers[index].Add(i);
+                    index++;
+                }
             }
             return strNumbers;
         }
         private LinkedList<Triangle> TriangleTransform(List<ConstructRow> ListStreamOpen)
         {
             List<List<int>> strNumbers = CheckTriangleTransform(ListStreamOpen);
-            int length = ListStreamOpen.Count;
+            int length = strNumbers.Count;
             for (int i = 0; i < length; i++)
             {
-                Triangle triangle = new Triangle();
                 if (strNumbers[i][0] != strNumbers[i][1])
                 {
+                    Triangle triangle = new Triangle();
                     triangle.Area = ListStreamOpen.ElementAt(strNumbers[i][0]).StrTypeCalculation.Equals("Area") ?
                         ListStreamOpen.ElementAt(strNumbers[i][0]).StrValue : null;
                     triangle.Perimeter = ListStreamOpen.ElementAt(strNumbers[i][1]).StrTypeCalculation.Equals("Perimeter") ?
@@ -156,10 +159,11 @@ namespace Lab_12_variant_1.OpenOrCreateFile
                 }
                 else
                 {
-                    triangle.Area = ListStreamOpen.ElementAt(i).StrTypeCalculation.Equals("Area") ?
-                          ListStreamOpen.ElementAt(i).StrValue : null;
-                    triangle.Perimeter = ListStreamOpen.ElementAt(i).StrTypeCalculation.Equals("Perimeter") ?
-                        ListStreamOpen.ElementAt(i).StrValue : null;
+                    Triangle triangle = new Triangle();
+                    triangle.Area = ListStreamOpen.ElementAt(strNumbers[i][0]).StrTypeCalculation.Equals("Area") ?
+                          ListStreamOpen.ElementAt(strNumbers[i][0]).StrValue : null;
+                    triangle.Perimeter = ListStreamOpen.ElementAt(strNumbers[i][0]).StrTypeCalculation.Equals("Perimeter") ?
+                        ListStreamOpen.ElementAt(strNumbers[i][0]).StrValue : null;
                     Triangles.AddLast(triangle);
                 }
             }
@@ -197,7 +201,7 @@ namespace Lab_12_variant_1.OpenOrCreateFile
             StreamReader streamReader = new StreamReader(fileFolder);
             string textFromFile = streamReader.ReadToEnd();
             streamReader.Close();
-            Regex regular = new Regex(@"(<td>)\d+(</td>)(<td>Area</td>)*(<td>Perimeter</td>)*(<td>)\s*\d+\,*\.*\d*(</td>)");
+            Regex regular = new Regex(@"\s*(<td>)\s*\d+\s*(<td>Area)*(<td>Perimeter)*\s*(<td>)\d+\,*\.*\d*(</tr>)\s*");
             regularSeach = regular.Match(textFromFile);
             int counter = CountRowsHtml(textFromFile);
             while (regularSeach.Success)
@@ -210,7 +214,8 @@ namespace Lab_12_variant_1.OpenOrCreateFile
         }
         private int CountRowsHtml(string stringText)
         {
-            Regex regularOnlyOne = new Regex(@"(<tr><td>Number</td><td>Type_Calculation</td><td>Value</td></tr>){1}");
+            Regex regularOnlyOne = new Regex
+                (@"(\s*(<tr>)\s*(<td>\s*Number\s*<td>\s*Type_Calculation\s*<td>\s*Value\s*</tr>)\s*){1}");
             Regex regularRN = new Regex(@"</tr>");
             Match textRNSeach = regularRN.Match(stringText);
             int counter = -1;

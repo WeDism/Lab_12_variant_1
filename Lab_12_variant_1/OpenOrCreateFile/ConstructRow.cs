@@ -10,9 +10,7 @@ namespace Lab_12_variant_1.OpenOrCreateFile
         int? strNumber;
         string strTypeCalculation = "";
         double? strValue;
-        public ConstructRow()
-        {
-        }
+        public ConstructRow() { }
         public ConstructRow(int? strNumber, string strTypeCalculation, double? strValue)
             : base()
         {
