@@ -16,12 +16,12 @@ namespace Lab_12_variant_1.OpenOrCreateFile
         Match regularSeach;
         public enum OpenAs
         {
-            None, txt, xml, html
+            txt, xml, html
         }
         public StreamOpenDataGridView(string fileFolder, OpenAs openAs)
         {
             ListStreamOpen.Clear();
-            if (openAs.Equals(OpenAs.None) || openAs.Equals(OpenAs.txt))
+            if ( openAs.Equals(OpenAs.txt))
                 Triangles = TriangleTransform(CreateListText(fileFolder));
 
             else if (openAs.Equals(OpenAs.xml))
@@ -32,12 +32,28 @@ namespace Lab_12_variant_1.OpenOrCreateFile
 
             else throw new ArgumentException();
         }
+        public StreamOpenDataGridView(string fileFolder)
+        {
+            ListStreamOpen.Clear();
+            FileInfo fileInfo = new FileInfo(fileFolder);
+
+            if ((fileInfo.Extension == ".txt") || (fileInfo.Extension == ""))
+                Triangles = TriangleTransform(CreateListText(fileFolder));
+
+            else if (fileInfo.Extension == ".xml")
+                Triangles = TriangleTransform(fileFolder);
+
+            else if (fileInfo.Extension == ".html")
+                Triangles = TriangleTransform(CreateListHtml(fileFolder));
+
+            else throw new ArgumentException();
+        }
         private List<ConstructRow> CreateListText(string fileFolder)
         {
             StreamReader streamReader = new StreamReader(fileFolder);
             string textFromFile = streamReader.ReadToEnd();
             streamReader.Close();
-            Regex regular = new Regex(@"\s*\d+\s*(Area)*(Perimeter)\s*\d+\,*\.*\d*\r\n");
+            Regex regular = new Regex(@"\s*\d+\s*(Area)*(Perimeter)*\s*\d+\,*\.*\d*\r\n");
             regularSeach = regular.Match(textFromFile);
             int counter = CountRowsText(textFromFile);
             while (regularSeach.Success)

@@ -55,5 +55,24 @@ namespace Lab_12_variant_1
             if (result == DialogResult.No) e.Cancel = true;
 #endif
         }
+
+        private void General_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyData == Keys.Escape)
+            {
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show("\tPush: ok or cancel", "Exit", buttons);
+                if (result == DialogResult.Yes)
+                {
+                    this.FormClosing -= EH;
+                    Application.Exit();
+                }
+            }
+        }
+        
+        private void menuStripGeneral_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            General_PreviewKeyDown(null, e);
+        }
     }
 }

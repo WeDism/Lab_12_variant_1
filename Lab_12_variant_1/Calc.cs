@@ -141,7 +141,7 @@ namespace Lab_12_variant_1
                         if (Open.FilterIndex == 1)
                         {
                             linkedListTypesCalculation.Clear();
-                            SODGV = new StreamOpenDataGridView(Open.FileName, StreamOpenDataGridView.OpenAs.xml);
+                            SODGV = new StreamOpenDataGridView(Open.FileName);
                             linkedListTypesCalculation = SODGV.ReturnTriangles;
                             dataGridViewTypeCalculated.Rows.Clear();
                             AddCollectionLinkedList();
@@ -149,7 +149,7 @@ namespace Lab_12_variant_1
                         if (Open.FilterIndex == 2)
                         {
                             linkedListTypesCalculation.Clear();
-                            SODGV = new StreamOpenDataGridView(Open.FileName, StreamOpenDataGridView.OpenAs.txt);
+                            SODGV = new StreamOpenDataGridView(Open.FileName);
                             linkedListTypesCalculation = SODGV.ReturnTriangles;
                             dataGridViewTypeCalculated.Rows.Clear();
                             AddCollectionLinkedList();
@@ -157,7 +157,7 @@ namespace Lab_12_variant_1
                         if (Open.FilterIndex == 3)
                         {
                             linkedListTypesCalculation.Clear();
-                            SODGV = new StreamOpenDataGridView(Open.FileName, StreamOpenDataGridView.OpenAs.html);
+                            SODGV = new StreamOpenDataGridView(Open.FileName);
                             linkedListTypesCalculation = SODGV.ReturnTriangles;
                             dataGridViewTypeCalculated.Rows.Clear();
                             AddCollectionLinkedList();
@@ -165,7 +165,7 @@ namespace Lab_12_variant_1
                         if (Open.FilterIndex == 4)
                         {
                             linkedListTypesCalculation.Clear();
-                            SODGV = new StreamOpenDataGridView(Open.FileName, StreamOpenDataGridView.OpenAs.None);
+                            SODGV = new StreamOpenDataGridView(Open.FileName);
                             linkedListTypesCalculation = SODGV.ReturnTriangles;
                             dataGridViewTypeCalculated.Rows.Clear();
                             AddCollectionLinkedList();

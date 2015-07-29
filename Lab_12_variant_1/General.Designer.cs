@@ -28,31 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuStripGeneral = new System.Windows.Forms.MenuStrip();
             this.inputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calculateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1.SuspendLayout();
+            this.menuStripGeneral.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // menuStripGeneral
             // 
-            this.menuStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.menuStripGeneral.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStripGeneral.Dock = System.Windows.Forms.DockStyle.None;
+            this.menuStripGeneral.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.menuStripGeneral.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.inputToolStripMenuItem,
             this.calculateToolStripMenuItem,
             this.exitToolStripMenuItem});
-            this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.menuStrip1.Size = new System.Drawing.Size(295, 261);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuStripGeneral.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.menuStripGeneral.Location = new System.Drawing.Point(0, 0);
+            this.menuStripGeneral.Name = "menuStripGeneral";
+            this.menuStripGeneral.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.menuStripGeneral.Size = new System.Drawing.Size(295, 280);
+            this.menuStripGeneral.TabIndex = 0;
+            this.menuStripGeneral.TabStop = true;
+            this.menuStripGeneral.Text = "menuStrip1";
+            this.menuStripGeneral.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.menuStripGeneral_PreviewKeyDown);
             // 
             // inputToolStripMenuItem
             // 
@@ -80,18 +82,18 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(300, 259);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.menuStripGeneral);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.menuStripGeneral;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "General";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "General";
-            //this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.General_FormClosing);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.General_PreviewKeyDown);
+            this.menuStripGeneral.ResumeLayout(false);
+            this.menuStripGeneral.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -99,7 +101,7 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip menuStripGeneral;
         private System.Windows.Forms.ToolStripMenuItem inputToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem calculateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
